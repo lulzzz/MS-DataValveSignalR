@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function() {
+            var deviceDataHub = $.connection.deviceDataHub;
+            deviceDataHub.client.newDeviceReading = function(deviceId) {
+                $("#DeviceData ul").append('<li>' + deviceId + '</li>');
+            };
+
+            $.connection.hub.start()
+                .done(function () {
+            });
+    });
+    </script>
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div id="DeviceData">
+    <ul>
+        
+    </ul>
+</div>
